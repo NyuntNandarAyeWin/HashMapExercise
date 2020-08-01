@@ -49,13 +49,21 @@ public class FileListStudent {
 		allstd = sc.nextLine();
 		if(allstd.equals("yes")) {
 			stdList.forEach(System.out::println);
+			System.out.print("You want to search student : ");
+			searchstd = sc.nextLine();
+			if(searchstd.equals("yes")){
+				System.out.println("Enter name you want to search : ");
+				String name = sc.nextLine();
+				List<Student> searchedStdList=stdList.stream().filter(s->s.getName().toLowerCase().contains(name)).collect(Collectors.toList());
+				searchedStdList.forEach(System.out::println);
+			}
 		}else {
 			System.out.print("You want to search student : ");
 			searchstd = sc.nextLine();
 			if(searchstd.equals("yes")){
 				System.out.println("Enter name you want to search : ");
 				String name = sc.nextLine();
-				List<Student> searchedStdList=stdList.stream().filter(s->s.getName().contains(name)).collect(Collectors.toList());
+				List<Student> searchedStdList=stdList.stream().filter(s->s.getName().toLowerCase().contains(name)).collect(Collectors.toList());
 				searchedStdList.forEach(System.out::println);
 			}
 		}
@@ -74,7 +82,7 @@ public class FileListStudent {
 		   
 		    try {
 				while ((line = br.readLine()) != null) {
-					String[] stdArr = line.split(";"); 
+					String[] stdArr = line.split(";");
 					String name=stdArr[0].split(":")[1];
 					String phone=stdArr[1].split(":")[1];
 					String rollNo=stdArr[2].split(":")[1];
